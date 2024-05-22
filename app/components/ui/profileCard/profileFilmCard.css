@@ -1,0 +1,31 @@
+.cardWrapper{
+    width: 100%;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 20px;
+
+    gap: 20px;
+
+    display: flex;
+}
+
+.cardWrapper img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.reviewImage{
+    width: 25%;
+}
+
+h1{
+    color: white;
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+p{
+    color: rgb(150, 150, 150);
+    font-size: 1.5rem;
+    font-style: italic;
+}

@@ -1,0 +1,63 @@
+body{
+  background-color: rgb(17, 17, 17);
+  margin: 0;
+  align-items: center;
+  min-height: 100dvh;
+  box-sizing: border-box;
+}
+
+.searchInput{
+    background-color: #3f3f3f;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 1.5rem;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+  
+    width: 50%;
+    transition: 0.5s;
+  }
+  
+  .searchInput:hover{
+    width: 55%;
+  }
+  
+  .searchInput:focus{
+    border: 1px solid white;
+  }
+
+  @keyframes fade {
+    0%{
+      visibility: hidden;
+      transform: translateY(-50px);
+      opacity: 0;
+      display: none;
+    }
+    100%{
+      visibility: visible;
+      opacity: 1;
+      display: block;
+    }
+  }
+
+  .myText{
+    animation: fade 0.5s linear;
+  }
+
+  #Results{
+    position: absolute;
+  }
+
+  .remove{
+    visibility: hidden;
+    opacity: 0;
+
+    transition: 1s;
+
+  }
+
+  .myCardTransition{
+    animation: fadeIn 0.5s linear;
+  }

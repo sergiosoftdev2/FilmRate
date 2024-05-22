@@ -2,32 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+*{
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+body{
+  background-color: rgb(17, 17, 17);
+  margin: 0;
+  box-sizing: border-box;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.tryButton{
+  width: 10%;
+  transition: 0.2s;
+}
+.tryButton:hover{
+  width: 12%;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+::-webkit-scrollbar {
+  width: 2px; /* Ancho de la barra de desplazamiento */
+}
+
+/* Estilos para la barra de desplazamiento vertical */
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color del relleno de la barra */
+  border-radius: 6px; /* Radio de la esquina de la barra */
+}
+
+/* Estilos para la barra de desplazamiento horizontal */
+::-webkit-scrollbar-thumb:horizontal {
+  background-color: #555; /* Color del relleno de la barra horizontal */
+}
+
+/* Estilos para el track (la parte que no está siendo desplazada) */
+::-webkit-scrollbar-track {
+  background: transparent; 
+  border-radius: 20px/* Color de fondo del track */
 }
