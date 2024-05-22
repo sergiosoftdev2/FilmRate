@@ -1,6 +1,7 @@
+"use client";
+
 import { removeAllListeners } from "process";
 import { useEffect, useState, useRef, use } from "react";
-
 
 // TO GET MOVIES FROM API
 export function search(setCards:any, addCard:any, cards:any){
@@ -131,5 +132,32 @@ async function getPopularMovies(){
     console.error('error:' + err);
     return null; // Retorna null en caso de error
   }
+
+}
+
+export async function getMovie(movie_id:any){
+
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMTYyNGQ2MTZiMDYxMGQ5ZmMxNjRhZWRjM2U5NmVkMyIsInN1YiI6IjY2MDBjMmU5MDQ3MzNmMDE3ZGVlMjQyZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.q4pgDjqoPU5SiD30QTNHU_oC6heI0jM0iJ3XtvsMiEM'
+    }
+  };
+
+  console.log(movie_id)
+
+  const url = `https://api.themoviedb.org/3/movie/${movie_id}?language=en-US`
+
+  try {
+    const res = await fetch(url, options);
+    const json = await res.json();
+    return json;
+  } catch (err) {
+    console.error('error:' + err);
+    return null; // Retorna null en caso de error
+  }
+
+  return null
 
 }

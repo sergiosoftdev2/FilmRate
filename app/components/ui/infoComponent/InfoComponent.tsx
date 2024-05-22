@@ -26,6 +26,7 @@ export function InfoComponent(props:any){
       
         const handleClickSubmit = () => {
           insertFilm(52, parseInt(props.idnumber), document.getElementById("textReview").value);
+          props.setShowInfo(false)
         };
       
         window.addEventListener("scroll", handleScroll);
