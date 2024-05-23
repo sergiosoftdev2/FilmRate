@@ -1,40 +1,54 @@
-.reviewImage{
-    position: relative;
-    display: flex;
-    flex-basis: 22%;
-    align-items: center;
-
-    z-index: 20;
-
-    transition: 0.2s;
-}
-
-.reviewImage:hover{
-    transform: translateY(-5px);
-}
-
-.reviewImage img{
-    height: 100%;
+  
+  .reviewImage img {
     width: 100%;
     border-radius: 10px;
-}
-
-.reviewWrapper{
-    position: absolute;
-    bottom: 0;
+  }
+  
+  .reviewWrapper {
+    position: absolute; /* Absolute positioning within its parent */
+    bottom: -20px; /* Align to bottom of .reviewImage */
     left: 0;
-    width: 100%;
-    position: absolute;
-}
+    top: 0;
+    background-color: #3f3f3f;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Improved transition */
+    z-index: 10; /* Set a higher z-index for layering */
+    transform: translateY(90%);
+    border-radius: 20px;
+  }
 
-h1{
-    color: white;
-    font-size: 1rem;
+  .reviewWrapper h1{
+    font-size: 3rem;
     font-weight: bold;
-}
+  }
 
-p{
-    color: rgb(150, 150, 150);
-    font-size: 0.2rem;
-    font-style: italic;
-}
+  .reviewWrapper p{
+    color: #d6d6d6;
+    padding: 10px;
+    background-color: rgb(36, 36, 36);
+    border-radius: 10px;
+  }
+  
+  .reviewImage:hover .reviewWrapper {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(100%); /* Remove unnecessary translateY */
+  }
+
+  .reviewCard{
+    position: relative; /* Necessary for child element positioning */
+    display: flex;
+    flex-basis: 22%;
+    width: 22%;
+    align-items: center;
+    transition: transform 0.2s ease-in-out; /* Improved transition */
+    cursor: pointer; /* Add a hover effect for interactivity */
+  }
+
+  .reviewCard:hover .reviewWrapper{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(100%); /* Remove unnecessary translateY */
+  }

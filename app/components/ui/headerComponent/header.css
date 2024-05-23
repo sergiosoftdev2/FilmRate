@@ -40,3 +40,7 @@
     transition: all 0.2s ease-in-out;
     z-index: 3;
 }
+
+.login{
+    background-color: #3f3f3f;
+}

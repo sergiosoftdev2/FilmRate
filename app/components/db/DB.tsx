@@ -1,4 +1,5 @@
 "use server";
+import { redirect } from "next/navigation";
 import { getMovie } from "../../search/searchEngine";
 import { createClient } from "@libsql/client";
 
@@ -60,4 +61,27 @@ export async function userFilms(user:number){
     }
 
     return moviesData
+}
+
+export async function userLogInDB(user:string, pass:string){
+    try{
+        const res = await client.execute({
+            sql: `SELECT username, psswd FROM users WHERE username = ? AND psswd = ?`, 
+            args: [user, pass]
+        });
+        if(res.rows[0].username == user && res.rows[0].psswd == pass){
+            return true
+        }
+    }catch(err){
+        console.log(err)
+        return false   // Handle errors gracefully (e.g., display an error message to the user)
+    }
+}
+
+export async function getUserID(username:string){
+    const res = await client.execute({
+        sql: "SELECT user_id FROM users WHERE username = ?",
+        args: [username]
+    })
+    return res.rows[0].user_id
 }
