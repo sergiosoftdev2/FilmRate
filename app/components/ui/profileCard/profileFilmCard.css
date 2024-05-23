@@ -2,26 +2,39 @@
   .reviewImage img {
     width: 100%;
     border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .bottomWrapper{
+    bottom: -10px;
+    transform: translateY(90%);
+  }
+
+  .topWrapper{
+    transform: translateY(20px);
   }
   
   .reviewWrapper {
     position: absolute; /* Absolute positioning within its parent */
-    bottom: -20px; /* Align to bottom of .reviewImage */
     left: 0;
-    top: 0;
-    background-color: #3f3f3f;
+    gap: 20px;
+    display: flex;
+    backdrop-filter: blur(10px);
+    background-color: #3f3f3fef;
+    border: 2px solid white;
+    box-shadow: 0px 0px 41px 7px rgba(0,0,0,0.1);
     padding: 20px;
     opacity: 0;
     visibility: hidden;
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Improved transition */
     z-index: 10; /* Set a higher z-index for layering */
-    transform: translateY(90%);
-    border-radius: 20px;
+    border-radius: 10px;
   }
 
   .reviewWrapper h1{
     font-size: 3rem;
     font-weight: bold;
+    color: white;
   }
 
   .reviewWrapper p{
@@ -29,12 +42,6 @@
     padding: 10px;
     background-color: rgb(36, 36, 36);
     border-radius: 10px;
-  }
-  
-  .reviewImage:hover .reviewWrapper {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(100%); /* Remove unnecessary translateY */
   }
 
   .reviewCard{
@@ -44,11 +51,16 @@
     width: 22%;
     align-items: center;
     transition: transform 0.2s ease-in-out; /* Improved transition */
-    cursor: pointer; /* Add a hover effect for interactivity */
   }
 
-  .reviewCard:hover .reviewWrapper{
+  .reviewCard:hover .bottomWrapper{
     visibility: visible;
     opacity: 1;
     transform: translateY(100%); /* Remove unnecessary translateY */
+  }
+
+  .reviewCard:hover .topWrapper{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
   }

@@ -12,6 +12,7 @@
     "@libsql/client": "^0.6.0",
     "@vectopus/atlas-icons-react": "^0.0.10",
     "clsx": "^2.1.1",
+    "fast-average-color": "^9.4.0",
     "framer-motion": "^11.2.4",
     "libsql": "^0.3.18",
     "next": "14.2.3",

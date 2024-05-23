@@ -17,9 +17,10 @@ export default function HeaderComponent() {
 
   useEffect(() => {
 
-
-    if(localStorage.user_id != ""){
-      SetisLogged(true)
+    if (localStorage.user_id && localStorage.user_id !== "") {
+      SetisLogged(true);
+    } else {
+      SetisLogged(false);
     }
 
     window.addEventListener("scroll", () => {
@@ -29,25 +30,26 @@ export default function HeaderComponent() {
         document.getElementById("headerComponent")?.classList.remove("moved");
       }
     })
-  });
+
+  }, []);
 
   function LoginComponent(){
     return(
       <>
         {isLogged ? (
           <Link href="/profile">
-              <div className="referenceButton">
-                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#FFFFFF">   
-                  <defs>
-                    <style>
-                    {`.cls-6374f8d9b67f094e4896c670-1{fill:none;stroke:currentColor;stroke-miterlimit:10;}`}
-                    </style>
-                    </defs>
-                    <circle className="cls-6374f8d9b67f094e4896c670-1" cx="12" cy="7.25" r="5.73"></circle>
-                    <path className="cls-6374f8d9b67f094e4896c670-1" d="M1.5,23.48l.37-2.05A10.3,10.3,0,0,1,12,13h0a10.3,10.3,0,0,1,10.13,8.45l.37,2.05"></path>
-                </svg>
-              </div>
-            </Link>
+            <div className="referenceButton">
+              <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#FFFFFF">   
+                <defs>
+                  <style>
+                  {`.cls-6374f8d9b67f094e4896c670-1{fill:none;stroke:currentColor;stroke-miterlimit:10;}`}
+                  </style>
+                  </defs>
+                  <circle className="cls-6374f8d9b67f094e4896c670-1" cx="12" cy="7.25" r="5.73"></circle>
+                  <path className="cls-6374f8d9b67f094e4896c670-1" d="M1.5,23.48l.37-2.05A10.3,10.3,0,0,1,12,13h0a10.3,10.3,0,0,1,10.13,8.45l.37,2.05"></path>
+              </svg>
+            </div>
+          </Link>
         ) : (
           <Link href="/login" className="referenceButton login">Login</Link>
         )}
@@ -64,7 +66,7 @@ export default function HeaderComponent() {
         <Link href="/search" className="referenceButton">Search</Link>
       </div>
       <div>
-        <LoginComponent />
+        <LoginComponent/>
       </div>
     </div>
   );

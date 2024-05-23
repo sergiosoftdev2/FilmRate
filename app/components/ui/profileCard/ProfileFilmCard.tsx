@@ -9,8 +9,13 @@ export function ProfileFilmCard(props:any) {
                     <img src={props.img} alt="imagen" />
                 </div>
                 <div className="reviewWrapper">
+                    <div className="h-[100%]">
+                        <img src={props.img} alt="imagen" className="h-[100%] rounded-[10px]" id="reviewImage"/>
+                    </div>
+                    <div className="max-w-[75%]">
                         <h1>{props.title}</h1>
                         <p>'{props.desc}'</p>
+                    </div>
                 </div>
             </div>
         </>

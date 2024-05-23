@@ -1,8 +1,19 @@
+"use client"
+
 import Link from "next/link";
 import HeaderComponent from "./components/ui/headerComponent/HeaderComponent";
 import { AuroraBackground } from "./components/ui/aurora-background";
+import { useEffect } from "react";
 
 export default function Home() {
+
+  useEffect(() => {
+    if(localStorage.getItem("isLogged") == "false" || localStorage.getItem("isLogged") == null){
+      localStorage.setItem("isLogged", "false")
+    }
+    document.title = "FilmRate";
+  }, [])
+
   return (
    <>
     <HeaderComponent />

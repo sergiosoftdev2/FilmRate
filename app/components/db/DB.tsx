@@ -1,5 +1,4 @@
 "use server";
-import { redirect } from "next/navigation";
 import { getMovie } from "../../search/searchEngine";
 import { createClient } from "@libsql/client";
 
