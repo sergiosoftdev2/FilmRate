@@ -8,10 +8,12 @@
   .bottomWrapper{
     bottom: -10px;
     transform: translateY(90%);
+    transition: 0.5s;
   }
 
   .topWrapper{
     transform: translateY(20px);
+    transition: 0.5s;
   }
   
   .reviewWrapper {
@@ -29,6 +31,7 @@
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Improved transition */
     z-index: 10; /* Set a higher z-index for layering */
     border-radius: 10px;
+    transition: 0.3s;
   }
 
   .reviewWrapper h1{

@@ -1,17 +1,32 @@
 "use client";
 
-import HeaderComponent, { HeaderComponentBasic } from "../components/ui/headerComponent/HeaderComponent";
+import { HeaderComponentBasic } from "../components/ui/headerComponent/HeaderComponent";
 import { ProfileFilmCard } from "../components/ui/profileCard/ProfileFilmCard";
-import { useState, useEffect, use} from "react";
+import { useState, useEffect} from "react";
 import "./profile.css"
-import { userFilms } from "../components/db/DB";
+import { userFilms, getUsersLibraryLength } from "../components/db/DB";
 import { useRouter } from "next/navigation";
-import ColorThief from "colorthief";
 
 export default function Profile() {
 
+    const fetchData = async (offset) => {
+        const userMovies = await userFilms(localStorage.getItem("user_id"), offset);
+        setMovies(userMovies);
+    }
+
+    const firstFetch = async () => {
+        const userMovies = await userFilms(localStorage.getItem("user_id"), offset);
+        setMovies(userMovies);
+    }
+
+    const getMoviesLength = async () => {
+        return await getUsersLibraryLength(localStorage.getItem("user_id")).then((res) => {return res.countmovies});
+    }
+
     const [movies, setMovies] = useState([]);
+    const [offset, setOffset] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
+    const [moviesLength, setMoviesLength] = useState(0);
     const router = useRouter();
 
     const handleClickLogOut = () => {
@@ -19,28 +34,41 @@ export default function Profile() {
         router.push("/login");
     };
 
+    const handleClickLeft = async () => {
+
+        if(offset > 0){
+            setOffset(offset - 8)
+            fetchData(offset - 8).then(UIFix());
+        }else if(offset == 0){
+            setOffset(0)
+            fetchData(0).then(UIFix());
+            let leftButton = document.getElementById("buttonLeft");
+            leftButton.disabled = "true"
+        }
+    }
+
+    const handleClickRight = async () => {
+        const length = await getMoviesLength();
+        if (offset < length - 8) {
+            setOffset(offset + 8);
+            await fetchData(offset + 8).then(UIFix()); // Llamar a fetchData con el nuevo offset
+        }
+    };
+
     useEffect(() => {
         if (!localStorage.getItem("isLogged") || localStorage.getItem("isLogged") === "false") {
             router.push("/login");
         } else {
-            const fetchData = async () => {
-                try {
-                    setIsLoading(true);
-                    const userMovies = await userFilms(localStorage.getItem("user_id"));
-                    setMovies(userMovies);
-                    setIsLoading(false);
-                } catch (error) {
-                    console.error("Error fetching movies:", error);
-                }
-            };
-            fetchData();
+            getMoviesLength().then((length) => setMoviesLength(length));
+            firstFetch().then(() => setIsLoading(false));
+            setOffset(0);
         }
 
     }, [router]);
 
     useEffect(() => {
         UIFix();
-    }, [isLoading])
+    }, [isLoading, setMovies, movies])
 
     if (isLoading) return (<></>);
     return(
@@ -60,7 +88,20 @@ export default function Profile() {
                         <p className="text-[#999] text-[1.2rem]">Esta es la cuenta de prueba de FilmRate, es totalmente ajustable a lo que el usuario quiera pedir</p>
                     </div>
                 </section>
-                <h1 className="text-white text-[4rem] mb-[20px]">Your Library - {movies.length}</h1>
+                <div className="flex w-full">
+                    <h1 className="text-white text-[4rem] mb-[20px]">Your Library - {moviesLength}</h1>
+                    <div className="flex ml-[auto]">
+                        <button 
+                            className="referenceButton bg-[#3f3f3f] text-white"
+                            onClick={handleClickLeft}
+                            id="buttonLeft"
+                        >&lt;</button>
+                        <button 
+                            className="referenceButton bg-[#3f3f3f] text-white"
+                            onClick={handleClickRight}
+                        >&gt;</button>
+                    </div>
+                </div>
                 <div className="flex flex-wrap gap-[30px] justify-left top-[60%] overloflow-hidden w-full relative" id="searchEngine">
                     {movies.map((element, index) => (
                         <ProfileFilmCard 
@@ -86,10 +127,13 @@ function UIFix(){
     let myWidth = searchEngine?.getBoundingClientRect().width
     
     let cards = document.querySelectorAll(".reviewCard");
+    let lenght = cards.length;
+
     cards.forEach((element) => {
         let index = parseInt(element.getAttribute("data-index"));
         let info = element.querySelector(".reviewWrapper")
 
+            
         if (!info) {
             console.error(`Element at index ${index} in cards array is missing the .reviewWrapper class`);
             return; // Skip to the next iteration if .reviewWrapper is not found
@@ -99,7 +143,7 @@ function UIFix(){
         
         info.style.width = myWidth + "px";
         info.style.left = "-" + element.offsetLeft + "px";
-        if(index >= 0 && index <=3 ){
+        if(index >= 0 && index <=3){
             info.classList.add("bottomWrapper");
             info.style.height = "110%";
         }else{

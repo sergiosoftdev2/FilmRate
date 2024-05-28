@@ -17,7 +17,7 @@ export async function insertFilm(user:number, id:number, review:string){
     console.log(res);
 }
 
-export async function userFilms(user:number){ 
+export async function userFilms(user:number, offset:number){ 
 
     const options = {
         method: 'GET',
@@ -30,7 +30,10 @@ export async function userFilms(user:number){
     let movies:any = []
     let moviesData = []
 
-    const res = await client.execute(`SELECT * FROM favorites WHERE user = ${user}`);
+    const res = await client.execute({
+        sql: "SELECT * FROM favorites WHERE user = ? LIMIT 8 OFFSET ?",
+        args: [user, offset]
+    });
     
     res.rows.forEach((myMovie) => {
         const movieData = {
@@ -83,4 +86,12 @@ export async function getUserID(username:string){
         args: [username]
     })
     return res.rows[0].user_id
+}
+
+export async function getUsersLibraryLength(user_id:number){
+    const res = await client.execute({
+        sql: "SELECT COUNT(user) as countmovies FROM favorites WHERE user = ?",
+        args: [user_id]
+    })
+    return res.rows[0]
 }
