@@ -97,7 +97,7 @@ export function InfoComponent(props:any){
                             <p>{props.description}</p>
 
                             <div className="mt-[20px]">
-                                <h2 className="text-white mb-2 text-[1.5rem] font-bold">> Write your review</h2>
+                            <h2 className="text-white mb-2 text-[1.5rem] font-bold">&gt; Write your review</h2>
                                 <textarea name="" id="textReview" className="bg-[#3f3f3f] border-none w-full rounded-[10px] p-4 text-white" placeholder="Write a review..."></textarea>
                             </div>
                         </div>

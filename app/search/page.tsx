@@ -6,7 +6,6 @@ import HeaderComponent from "../components/ui/headerComponent/HeaderComponent"
 import "./page.css"
 import { Playfair_Display } from "next/font/google";
 import { SearchCards } from "../components/ui/searchCards/SearchCards";
-import { get } from "http";
 import { InfoComponent } from "../components/ui/infoComponent/InfoComponent";
 
 const playfairDisplay = Playfair_Display({

@@ -14,7 +14,7 @@ export function ProfileFilmCard(props:any) {
                     </div>
                     <div className="max-w-[75%]">
                         <h1>{props.title}</h1>
-                        <p>'{props.desc}'</p>
+                        <p>&apos;{props.desc}&apos;</p>
                     </div>
                 </div>
             </div>
