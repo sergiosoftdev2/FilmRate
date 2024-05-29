@@ -3,8 +3,8 @@ import { getMovie } from "../../search/searchEngine";
 import { createClient } from "@libsql/client";
 
 const client = createClient({
-    url: process.env.DB_URL,
-    authToken: process.env.DB_KEY,
+    url: process.env.DB_URL as string,
+    authToken: process.env.DB_KEY as string,
 })
 
 export async function selectUsers(){
