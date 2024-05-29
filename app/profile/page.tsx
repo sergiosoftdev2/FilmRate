@@ -117,7 +117,6 @@ export default function Profile() {
                     <button onClick={handleClickLogOut} className="bg-[#3f3f3f] relative mt-[50px] text-white p-2">Log Out</button>
                 </div>
             </div>
-            <script src="https://unpkg.com/fast-average-color/dist/index.browser.min.js"></script>
         </>
     );
 }
