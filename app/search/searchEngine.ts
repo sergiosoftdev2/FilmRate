@@ -4,7 +4,7 @@ import { removeAllListeners } from "process";
 import { useEffect, useState, useRef, use } from "react";
 
 // TO GET MOVIES FROM API
-export function search(setCards:any, addCard:any, cards:any){
+export function SearchMyMovies(setCards:any, addCard:any, cards:any){
     // SEARCH MOVIES
     useEffect(() => {
 
@@ -46,7 +46,7 @@ export function search(setCards:any, addCard:any, cards:any){
     }, [cards]);
 }
 
-export function searchPopular(setCards:any, addCard:any, cards:any, isFirstRender:any){
+export function SearchPopular(setCards:any, addCard:any, cards:any, isFirstRender:any){
   useEffect(() => {
     const searchWrappe = document.getElementById("SearchWrapper");
     const mySearch = document.getElementById("search");

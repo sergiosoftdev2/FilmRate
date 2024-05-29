@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { getInfoMovie, getMetaData, search, searchPopular } from "./searchEngine";
+import { getInfoMovie, getMetaData, SearchMyMovies, SearchPopular } from "./searchEngine";
 import HeaderComponent from "../components/ui/headerComponent/HeaderComponent"
 import "./page.css"
 import { Playfair_Display } from "next/font/google";
@@ -34,8 +34,8 @@ export default function Search() {
     setCards(prevCards => [...prevCards, newCard]);
   };
 
-  searchPopular(setCards, addCard, cards, isFirstRender);
-  search(setCards, addCard, cards);
+  SearchPopular(setCards, addCard, cards, isFirstRender);
+  SearchMyMovies(setCards, addCard, cards);
   
 
   useEffect(() => {
