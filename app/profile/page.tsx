@@ -8,22 +8,36 @@ import { userFilms, getUsersLibraryLength } from "../components/db/DB";
 import { useRouter } from "next/navigation";
 
 export default function Profile() {
+    
+    interface Movie {
+        data: {
+            poster_path: string;
+            title: string;
+        };
+        critic: string;
+    }
 
-    const fetchData = async (offset) => {
-        const userMovies = await userFilms(localStorage.getItem("user_id"), offset);
-        setMovies(userMovies);
+    const fetchData = async (offset:any) => {
+        const userID:number = parseInt(localStorage.getItem("user_id") as string);
+        const userMovies = await userFilms(userID, offset);
+        if(userMovies){
+            setMovies(userMovies);
+        }
+        
     }
 
     const firstFetch = async () => {
-        const userMovies = await userFilms(localStorage.getItem("user_id"), offset);
-        setMovies(userMovies);
+        const userMovies = await userFilms(parseInt(localStorage.getItem("user_id") as string), offset);
+        if(userMovies){
+            setMovies(userMovies);
+        }
     }
 
-    const getMoviesLength = async () => {
-        return await getUsersLibraryLength(localStorage.getItem("user_id")).then((res) => {return res.countmovies});
+    const getMoviesLength = async (): Promise<number> => {
+        return await getUsersLibraryLength(parseInt(localStorage.getItem("user_id") as string)).then((res) => {return res.countmovies});
     }
 
-    const [movies, setMovies] = useState([]);
+    const [movies, setMovies] = useState<Movie[]>([]);
     const [offset, setOffset] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [moviesLength, setMoviesLength] = useState(0);
@@ -41,14 +55,17 @@ export default function Profile() {
             fetchData(offset - 8);
         }else if(offset == 0){
             setOffset(0)
-            fetchData(0).then(UIFix());
-            let leftButton = document.getElementById("buttonLeft");
-            leftButton.disabled = "true"
+            fetchData(0)
+            UIFix();
+            let leftButton = document.getElementById("buttonLeft") as HTMLButtonElement;
+            if(leftButton){
+                leftButton.disabled = true;
+            }
         }
     }
 
     const handleClickRight = async () => {
-        const length = await getMoviesLength();
+        const length: number = await getMoviesLength();
         if (offset < length - 8) {
             setOffset(offset + 8);
             await fetchData(offset + 8) // Llamar a fetchData con el nuevo offset
@@ -64,7 +81,7 @@ export default function Profile() {
             setOffset(0);
         }
 
-    }, [router, firstFetch]);
+    }, [router]);
 
     useEffect(() => {
         UIFix();
@@ -128,7 +145,7 @@ function UIFix(){
     let cards = document.querySelectorAll(".reviewCard");
     let lenght = cards.length;
 
-    cards.forEach((element) => {
+    cards.forEach((element:any) => {
         let index = parseInt(element.getAttribute("data-index"));
         let info = element.querySelector(".reviewWrapper")
 

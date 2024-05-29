@@ -13,8 +13,13 @@ export async function selectUsers(){
 }
 
 export async function insertFilm(user:number, id:number, review:string){
-    const res = await client.execute(`INSERT INTO favorites (user, movie, critic) VALUES (${user}, ${id}, '${review}')`);
-    console.log(res);
+    try{
+        const res = await client.execute(`INSERT INTO favorites (user, movie, critic) VALUES (${user}, ${id}, '${review}')`);
+        return true;
+    }catch(err){
+        console.log(err)
+        return false
+    }
 }
 
 export async function userFilms(user:number, offset:number){ 
@@ -38,7 +43,7 @@ export async function userFilms(user:number, offset:number){
     res.rows.forEach((myMovie) => {
         const movieData = {
             data: myMovie.movie,
-            critic: myMovie.critic
+            critic: myMovie.critic as string
         }
         movies.push(movieData)
 
@@ -52,8 +57,8 @@ export async function userFilms(user:number, offset:number){
             const res = await fetch(url, options);
             const json = await res.json();
             const movieData = {
-                data: json,
-                critic: element.critic
+                data: json as { poster_path: string; title: string },
+                critic: element.critic as string
             }
             moviesData.push(movieData)
         } catch (err) {
@@ -80,15 +85,15 @@ export async function userLogInDB(user:string, pass:string){
     }
 }
 
-export async function getUserID(username:string){
+export async function getUserID(username:string): Promise<string>{
     const res = await client.execute({
         sql: "SELECT user_id FROM users WHERE username = ?",
         args: [username]
     })
-    return res.rows[0].user_id
+    return "" + res.rows[0].user_id
 }
 
-export async function getUsersLibraryLength(user_id:number){
+export async function getUsersLibraryLength(user_id:number): Promise<any>{
     const res = await client.execute({
         sql: "SELECT COUNT(user) as countmovies FROM favorites WHERE user = ?",
         args: [user_id]

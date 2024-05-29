@@ -3,7 +3,7 @@ import "./info.css"
 import { selectUsers, insertFilm } from "../../db/DB";
 import Link from "next/link";
 
-function submitButton(isLogged:boolean){
+function submitButton(isLogged:boolean, handleClickSubmit:any){
   return(
     <>
       {
@@ -31,6 +31,13 @@ export function InfoComponent(props:any){
 
     }, []);
 
+    const handleClickSubmit = () => {
+      const textReviewElement = document.getElementById("textReview") as HTMLTextAreaElement;
+      insertFilm(52, parseInt(props.idnumber), textReviewElement.value);
+      console.log(textReviewElement.value)
+      props.setShowInfo(false)
+    };
+
     useEffect(() => {
         const infoBox = document.getElementById("infoBox");
         const closeInfoBox = document.getElementById("closeInfoBox");
@@ -51,11 +58,6 @@ export function InfoComponent(props:any){
           }
         };
       
-        const handleClickSubmit = () => {
-          insertFilm(52, parseInt(props.idnumber), document.getElementById("textReview")?.value);
-          props.setShowInfo(false)
-        };
-      
         window.addEventListener("scroll", handleScroll);
         closeInfoBox?.addEventListener("click", handleClickCloseInfoBox);
         submitButton?.addEventListener("click", handleClickSubmit);
@@ -67,7 +69,7 @@ export function InfoComponent(props:any){
           submitButton?.removeEventListener("click", handleClickSubmit);
         };
       
-      }, [props.setShowInfo]);
+      }, [props.setShowInfo, isLogged]);
 
     return(
         <div className="wrapper" id="infoBox">
@@ -103,7 +105,7 @@ export function InfoComponent(props:any){
                         </div>
                     
                     </div>
-                    {submitButton(isLogged)}
+                    {submitButton(isLogged, handleClickSubmit)}
                 </div>
 
                 
