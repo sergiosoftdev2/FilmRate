@@ -38,7 +38,7 @@ export default function Profile() {
 
         if(offset > 0){
             setOffset(offset - 8)
-            fetchData(offset - 8).then(UIFix());
+            fetchData(offset - 8);
         }else if(offset == 0){
             setOffset(0)
             fetchData(0).then(UIFix());
@@ -51,7 +51,7 @@ export default function Profile() {
         const length = await getMoviesLength();
         if (offset < length - 8) {
             setOffset(offset + 8);
-            await fetchData(offset + 8).then(UIFix()); // Llamar a fetchData con el nuevo offset
+            await fetchData(offset + 8) // Llamar a fetchData con el nuevo offset
         }
     };
 
@@ -64,7 +64,7 @@ export default function Profile() {
             setOffset(0);
         }
 
-    }, [router]);
+    }, [router, firstFetch]);
 
     useEffect(() => {
         UIFix();
