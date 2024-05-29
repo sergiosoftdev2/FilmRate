@@ -8,7 +8,7 @@ export function SearchMyMovies(setCards:any, addCard:any, cards:any){
     // SEARCH MOVIES
     useEffect(() => {
 
-      const search = document.getElementById("search");
+      const search = document.getElementById("search") as HTMLInputElement;
 
       const handleKeyUp = async (e:any) => {
 
@@ -49,7 +49,7 @@ export function SearchMyMovies(setCards:any, addCard:any, cards:any){
 export function SearchPopular(setCards:any, addCard:any, cards:any, isFirstRender:any){
   useEffect(() => {
     const searchWrappe = document.getElementById("SearchWrapper");
-    const mySearch = document.getElementById("search");
+    const mySearch = document.getElementById("search") as HTMLInputElement;
     const title = document.getElementById("title");
 
     mySearch?.addEventListener("keyup", (e:any) => {
