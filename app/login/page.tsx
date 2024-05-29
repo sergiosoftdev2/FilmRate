@@ -56,7 +56,7 @@ export default function Login({children}: any){
                             <h2 className="text-white text-left text-[1.2rem] mb-[10px]">Password</h2>
                             <input type="password" id="password" className="w-full rounded-[5px] p-1"></input>
                         </div>
-                        <button onClick={handleClick}>Login</button>
+                        <button onClick={handleClick} className="myLoginButton">Login</button>
                     </article>
                 </div>
                 <p className="text-white mt-[20px] z-30 text-[1rem]">You don't have an account yet? 

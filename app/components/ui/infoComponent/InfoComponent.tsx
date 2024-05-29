@@ -1,8 +1,35 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import "./info.css"
 import { selectUsers, insertFilm } from "../../db/DB";
+import Link from "next/link";
+
+function submitButton(isLogged:boolean){
+  return(
+    <>
+      {
+        isLogged ? (
+          <button className="submitButton" id="submitButton">Submit</button>
+        ) : (
+          <Link href="/login" className="submitButton">Login to submit</Link>
+        )
+      }
+    </>
+  )
+}
 
 export function InfoComponent(props:any){
+
+    const [isLogged, SetisLogged] = useState(false) 
+
+    useEffect(() => {
+
+      if (localStorage.getItem("isLogged") === "true") {
+        SetisLogged(true);
+      } else {
+        SetisLogged(false);
+      }
+
+    }, []);
 
     useEffect(() => {
         const infoBox = document.getElementById("infoBox");
@@ -43,7 +70,7 @@ export function InfoComponent(props:any){
       }, [props.setShowInfo]);
 
     return(
-        <div className="absolute left-0 w-full h-full z-50 wrapper flex items-center justify-center" id="infoBox">
+        <div className="wrapper" id="infoBox">
             <div className="referenceButton absolute right-0 top-0 m-5" id="closeInfoBox">
                 <svg
                     width="32"
@@ -74,8 +101,9 @@ export function InfoComponent(props:any){
                                 <textarea name="" id="textReview" className="bg-[#3f3f3f] border-none w-full rounded-[10px] p-4 text-white" placeholder="Write a review..."></textarea>
                             </div>
                         </div>
-                    <button className="submitButton" id="submitButton">Submit</button>
+                    
                     </div>
+                    {submitButton(isLogged)}
                 </div>
 
                 

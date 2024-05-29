@@ -71,6 +71,8 @@ export default function Search() {
   return (
     <>
 
+      <title>Search | FilmRate</title>
+
       <HeaderComponent/> 
       {showInfo && <InfoComponent idnumber={data.idnumber} title={data.title} image={data.image} description={data.description} setShowInfo={handleShowInfo} showInfo={showInfo} />}
       <div className="w-[100%] relative">

@@ -17,7 +17,7 @@ export default function HeaderComponent() {
 
   useEffect(() => {
 
-    if (localStorage.user_id && localStorage.user_id !== "") {
+    if (localStorage.getItem("isLogged") === "true") {
       SetisLogged(true);
     } else {
       SetisLogged(false);
