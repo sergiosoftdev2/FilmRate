@@ -1,5 +1,6 @@
 body{
     margin: 0 auto;
+    overflow-x: hidden;
 }
 
 h1{
@@ -8,4 +9,215 @@ h1{
 
 .bordersProfile{
     padding: 20px;
+    overflow: hidden;
+    height: auto;
 }
+
+.loadingCard{
+    flex-basis: 22%;
+    height: 300px;
+    background-color: white;
+    background: #333;
+    background-size: 200% 200%;
+    background-repeat: no-repeat;
+    animation: l2 1.5s infinite; 
+    border-radius: 20px;
+}
+
+.infoUser{
+    display: flex;
+    gap: 20px;
+}
+
+.infoUser h2{
+    font-size: 3rem;
+    color: white;
+    font-weight: bold;
+}
+
+.infoUser p{
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.infoUser .imgWrapper{
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.infoUser .imgWrapper img{
+    border-radius: 30px;
+}
+
+.infoUser .infoWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.infoUser .infoWrapper h2{
+    font-size: 4rem;
+}
+
+.infoUser .infoWrapper p{
+    font-size: 1.5rem;
+}
+
+.library{
+    font-size: 4rem;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+@keyframes l2 {
+    0%{
+        opacity: 0.3;
+    }
+    50%{
+        opacity: 0.6;
+    }
+    100%{
+        opacity: 0.3;
+    }
+  }
+
+  @media (min-width: 300px) {
+    .bordersProfile{
+        width: 100%;
+    }
+
+    .infoUser .imgWrapper{
+        width: 30%;
+        padding: 0;
+    }
+
+    .infoUser .infoWrapper{
+        width: 70%;
+    }
+
+    .infoUser .infoWrapper h2{
+        font-size: 2rem;
+    }
+
+    .infoUser .infoWrapper p{
+        font-size: 0.8rem;
+    }
+
+    .library{
+        font-size: 1.3rem;
+    }
+
+    .reviewCard{
+        flex-basis: 40%;
+    }
+  }
+  
+  /* You might do landscape phones here if your content seems to need it */
+  @media (min-width: 450px) {
+
+    .bordersProfile{
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .infoUser .imgWrapper{
+        width: 30%;
+    }
+
+    .infoUser .infoWrapper{
+        width: 70%;
+    }
+
+    .infoUser .infoWrapper h2{
+        font-size: 2rem;
+    }
+
+    .infoUser .infoWrapper p{
+        font-size: 1rem;
+    }
+
+    .library{
+        font-size: 1.8rem;
+    }
+
+    .reviewCard{
+        flex-basis: 45%;
+    }
+
+  }
+  
+  /* Starting into tablets somewhere in here */
+  @media (min-width: 600px) {
+
+    .bordersProfile{
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .infoUser .imgWrapper{
+        width: 30%;
+    }
+
+    .infoUser .infoWrapper{
+        width: 70%;
+    }
+
+    .infoUser .infoWrapper h2{
+        font-size: 2rem;
+    }
+
+    .infoUser .infoWrapper p{
+        font-size: 1rem;
+    }
+
+  }
+  
+  /* Perhaps bigger tablets */
+  @media (min-width: 750px) {
+
+    .reviewCard{
+        flex-basis: 22%;
+    }
+  }
+  
+  /* Desktop screen or landscape tablet */
+  @media (min-width: 900px) {
+
+    
+  }
+  
+  /* A bit bigger if you need some adjustments around here */
+  @media (min-width: 1100px) {
+  }
+  
+  /* Widescreens */
+  @media (min-width: 1500px) {
+
+    .bordersProfile{
+        width: 70%;
+    }
+
+    .infoUser .imgWrapper{
+        width: 15%;
+    }
+
+    .infoUser .infoWrapper{
+        width: 40%;
+        padding: 20px;
+    }
+
+    .infoUser .infoWrapper h2{
+        font-size: 3rem;
+    }
+
+    .infoUser .infoWrapper p{
+        font-size: 1.5rem;
+    }
+  }
+  

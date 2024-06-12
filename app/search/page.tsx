@@ -28,6 +28,7 @@ export default function Search() {
     image: "",
     description: "",
   });
+
   const [cards, setCards] = useState<Card[]>([]);
   const [showInfo, setShowInfo] = useState(false);
   const isFirstRender = useRef(true);
@@ -55,6 +56,7 @@ export default function Search() {
           image: element.getAttribute("data-img") as string,
           description: element.getAttribute("data-description") as string,
         })
+        console.log(data)
       })
       element.addEventListener("click", () => {
         setShowInfo(true);
@@ -66,7 +68,6 @@ export default function Search() {
     }else{
       document.body.style.overflow = "auto";
     }
-
   })
 
   const handleShowInfo = (value:any) => {

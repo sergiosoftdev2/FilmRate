@@ -4,7 +4,7 @@ export function ProfileFilmCard(props:any) {
 
     return(
         <>
-            <div className="reviewCard" data-index={props.indexNum}>
+            <div className="reviewCard" data-index={props.indexNum} data-img={props.img} data-title={props.title} data-desc={props.desc} data-id={props.id}>
                 <div className="reviewImage">
                     <img src={props.img} alt="imagen" />
                 </div>

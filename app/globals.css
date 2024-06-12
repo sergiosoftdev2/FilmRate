@@ -4,6 +4,7 @@
 
 *{
   box-sizing: border-box;
+  -webkit-user-drag: none;
 }
 
 body{
@@ -15,9 +16,6 @@ body{
 .tryButton{
   width: 10%;
   transition: 0.2s;
-}
-.tryButton:hover{
-  width: 12%;
 }
 
 ::-webkit-scrollbar {
@@ -43,6 +41,16 @@ body{
 
 @media (min-width: 300px) {
 
+  .textTitle{
+    font-size: 4rem;
+    font-weight: bold;
+  }
+
+  .textInfo{
+    font-size: 1rem;
+    text-align: center;
+  }
+
 }
 
 /* You might do landscape phones here if your content seems to need it */
@@ -67,4 +75,15 @@ body{
 
 /* Widescreens */
 @media (min-width: 1500px) {
+
+  .textTitle{
+    font-size: 10rem;
+    font-weight: bold;
+  }
+
+  .textInfo{
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
 }

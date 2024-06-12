@@ -57,7 +57,7 @@ export async function userFilms(user:number, offset:number){
             const res = await fetch(url, options);
             const json = await res.json();
             const movieData = {
-                data: json as { poster_path: string; title: string },
+                data: json as { poster_path: string; title: string, id:number },
                 critic: element.critic as string
             }
             moviesData.push(movieData)
