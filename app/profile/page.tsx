@@ -2,51 +2,48 @@
 
 import { HeaderComponentBasic } from "../components/ui/headerComponent/HeaderComponent";
 import { ProfileFilmCard } from "../components/ui/profileCard/ProfileFilmCard";
-import { useState, useEffect} from "react";
+import React, { useEffect, useState } from 'react';
 import "./profile.css"
 import { userFilms, getUsersLibraryLength } from "../components/db/DB";
 import { useRouter } from "next/navigation";
 import { InfoComponentProfile } from "../components/ui/infoComponent/InfoComponent";
 
 export default function Profile() {
-
     const [showInfo, setShowInfo] = useState(false);
-
     const [data, setData] = useState({
-        idnumber: 0, 
-        title: "", 
+        idnumber: 0,
+        title: "",
         image: "",
         description: "",
-      });
+    });
 
-    const handleShowInfo = (value:any) => {
-    setShowInfo(value);
+    const handleShowInfo = (value: any) => {
+        setShowInfo(value);
     };
 
     useEffect(() => {
         let myCards = document.querySelectorAll(".reviewCard");
         myCards.forEach((element) => {
             element.addEventListener("mouseover", () => {
-            setData({
-                idnumber: parseInt(element.getAttribute("data-id") as string),
-                title: element.getAttribute("data-title") as string,
-                image: element.getAttribute("data-img") as string,
-                description: element.getAttribute("data-desc") as string,
-            })
+                setData({
+                    idnumber: parseInt(element.getAttribute("data-id") as string),
+                    title: element.getAttribute("data-title") as string,
+                    image: element.getAttribute("data-img") as string,
+                    description: element.getAttribute("data-desc") as string,
+                })
             })
             element.addEventListener("click", () => {
                 setShowInfo(true);
             })
+        })
+
+        if (showInfo) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
     })
 
-    if(showInfo){
-        document.body.style.overflow = "hidden";
-    }else{
-        document.body.style.overflow = "auto";
-    }
-
-    })
-    
     interface Movie {
         data: {
             poster_path: string;
@@ -56,24 +53,25 @@ export default function Profile() {
         critic: string;
     }
 
-    const fetchData = async (offset:any) => {
-        const userID:number = parseInt(localStorage.getItem("user_id") as string);
+    const fetchData = async (offset: any) => {
+        const userID: number = parseInt(typeof window !== 'undefined' ? window.localStorage.getItem("user_id") as string : "0") ?? 0;
         const userMovies = await userFilms(userID, offset);
-        if(userMovies){
+        if (userMovies) {
             setMovies(userMovies);
         }
-        
     }
 
     const firstFetch = async () => {
-        const userMovies = await userFilms(parseInt(localStorage.getItem("user_id") as string), offset);
-        if(userMovies){
+        const userID: number = parseInt(typeof window !== 'undefined' ? window.localStorage.getItem("user_id") as string : "0") ?? 0;
+        const userMovies = await userFilms(userID, offset);
+        if (userMovies) {
             setMovies(userMovies);
         }
     }
 
     const getMoviesLength = async (): Promise<number> => {
-        return await getUsersLibraryLength(parseInt(localStorage.getItem("user_id") as string)).then((res) => {return res.countmovies});
+        const userID: number = parseInt(typeof window !== 'undefined' ? window.localStorage.getItem("user_id") as string : "0") ?? 0;
+        return await getUsersLibraryLength(userID).then((res) => { return res.countmovies });
     }
 
     const [movies, setMovies] = useState<Movie[]>([]);
@@ -83,21 +81,22 @@ export default function Profile() {
     const router = useRouter();
 
     const handleClickLogOut = () => {
-        localStorage.setItem("isLogged", "false");
-        router.push("/login");
+        if (typeof window !== "undefined") {
+            window.localStorage.setItem("isLogged", "false");
+            router.push("/login");
+        }
     };
 
     const handleClickLeft = async () => {
-
-        if(offset > 0){
+        if (offset > 0) {
             setOffset(offset - 8)
             fetchData(offset - 8);
-        }else if(offset == 0){
+        } else if (offset == 0) {
             setOffset(0)
             fetchData(0)
             UIFix();
             let leftButton = document.getElementById("buttonLeft") as HTMLButtonElement;
-            if(leftButton){
+            if (leftButton) {
                 leftButton.disabled = true;
             }
         }
@@ -112,23 +111,23 @@ export default function Profile() {
     };
 
     useEffect(() => {
-        if (!localStorage.getItem("isLogged") || localStorage.getItem("isLogged") === "false") {
-            router.push("/login");
-        } else {
-            getMoviesLength().then((length) => setMoviesLength(length));
-            firstFetch().then(() => setIsLoading(false));
-            UIFix();
-            setOffset(0);
+        if (typeof window !== "undefined") {
+            if (!window.localStorage.getItem("isLogged") || window.localStorage.getItem("isLogged") === "false") {
+                router.push("/login");
+            } else {
+                getMoviesLength().then(setMoviesLength);
+                fetchData(offset).then(() => setIsLoading(false));
+                setOffset(0);
+            }
         }
-
-    }, [router]);
+    }, [fetchData, getMoviesLength, offset, router]);
 
     useEffect(() => {
         UIFix();
     }, [isLoading, setMovies, movies])
 
     // SKELETON
-    if (isLoading){
+    if (isLoading) {
         return (
             <>
                 <title>My Profile</title>
@@ -136,26 +135,26 @@ export default function Profile() {
                 <div className="w-[1000px] overflow-hidden ml-[auto] mr-[auto] bordersProfile">
                     <section className="w-full flex gap-[50px] items-center justify-left">
                         <div className="w-[25%]">
-                            <img 
-                                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" 
-                                alt="Profile Pic" 
-                                className="w-[100%] rounded-[50px] p-5"    
+                            <img
+                                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                                alt="Profile Pic"
+                                className="w-[100%] rounded-[50px] p-5"
                             />
                         </div>
                         <div>
-                            <h2 className="text-white text-[4rem]">{localStorage.username}</h2>
+                            <h2 className="text-white text-[4rem]">{typeof window !== 'undefined' && window.localStorage.username}</h2>
                             <p className="text-[#999] text-[1.2rem]">Esta es la cuenta de prueba de FilmRate, es totalmente ajustable a lo que el usuario quiera pedir</p>
                         </div>
                     </section>
                     <div className="flex w-full">
                         <h1 className="text-white text-[4rem] mb-[20px]">Your Library - {moviesLength}</h1>
                         <div className="flex ml-[auto]">
-                            <button 
+                            <button
                                 className="referenceButton bg-[#3f3f3f] text-white"
                                 onClick={handleClickLeft}
                                 id="buttonLeft"
                             >&lt;</button>
-                            <button 
+                            <button
                                 className="referenceButton bg-[#3f3f3f] text-white"
                                 onClick={handleClickRight}
                             >&gt;</button>
@@ -177,7 +176,7 @@ export default function Profile() {
                 </div>
             </>
         );
-    } 
+    }
 
     else return(
         <>
@@ -194,7 +193,7 @@ export default function Profile() {
                         />
                     </div>
                     <div className="infoWrapper p-5">
-                        <h2>{localStorage.username}</h2>
+                        <h2>{typeof window !== 'undefined' && window.localStorage.username}</h2>
                         <p>Esta es la cuenta de prueba de FilmRate, es totalmente ajustable a lo que el usuario quiera pedir</p>
                     </div>
                 </section>
