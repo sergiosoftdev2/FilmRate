@@ -13,6 +13,10 @@ export async function selectUsers(){
 }
 
 export async function insertFilm(user:number, id:number, review:string){
+
+    console.log(id, user, review);
+    
+
     try{
         const res = await client.execute(`INSERT INTO favorites (user, movie, critic) VALUES (${user}, ${id}, '${review}')`);
         return true;
@@ -70,19 +74,57 @@ export async function userFilms(user:number, offset:number){
     return moviesData
 }
 
+// LOG IN
+
 export async function userLogInDB(user:string, pass:string){
+
     try{
         const res = await client.execute({
-            sql: `SELECT username, psswd FROM users WHERE username = ? AND psswd = ?`, 
-            args: [user, pass]
+            sql: `SELECT username, psswd FROM users WHERE username = ?`, 
+            args: [user]
         });
-        if(res.rows[0].username == user && res.rows[0].psswd == pass){
+
+        console.log(res.rows[0].psswd)
+        console.log(encrypt(pass))
+
+        if(res.rows[0].username == user && res.rows[0].psswd == encrypt(pass)){
             return true
         }
     }catch(err){
         console.log(err)
         return false   // Handle errors gracefully (e.g., display an error message to the user)
     }
+}
+
+// REGISTER
+
+export async function userRegister(user:string, pass:string){
+
+    const resCount = await countUsers()
+
+    try{
+        const res = await client.execute({
+            sql: `INSERT INTO users VALUES (?, ?, ?)`,
+            args: [resCount.countmovies, user, encrypt(pass)]
+        }).then(() => {
+            userLogInDB(user, pass)
+        })
+
+        return true
+
+    }catch(err){
+        console.log(err)
+        return false   // Handle errors gracefully (e.g., display an error message to the user)
+    }
+
+    
+
+}
+
+export async function countUsers(){
+    const res = await client.execute("SELECT COUNT(username) as countmovies FROM users")
+    console.log(res.rows[0])
+    return res.rows[0]
 }
 
 export async function getUserID(username:string): Promise<string>{
@@ -99,4 +141,15 @@ export async function getUsersLibraryLength(user_id:number): Promise<any>{
         args: [user_id]
     })
     return res.rows[0]
+}
+
+// ENCRYPT PASSWORDS
+
+function encrypt(password: string){
+    var crypto = require('crypto');
+    var name = password;
+    var hash = crypto.createHash('sha256').update(name).digest('hex');
+
+    return hash
+
 }

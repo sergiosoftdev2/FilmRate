@@ -33,7 +33,9 @@ export function InfoComponent(props:any){
 
     const handleClickSubmit = () => {
       const textReviewElement = document.getElementById("textReview") as HTMLTextAreaElement;
-      insertFilm(52, parseInt(props.idnumber), textReviewElement.value);
+      if(localStorage.getItem("user_id")){
+        insertFilm(parseInt(localStorage.getItem("user_id") as string), parseInt(props.idnumber), textReviewElement.value);
+      }
       console.log(textReviewElement.value)
       props.setShowInfo(false)
     };
@@ -184,7 +186,7 @@ export function InfoComponentProfile(props:any){
 
                           <div className="mt-[20px]">
                           <h2 className="text-white mb-2 text-[1.5rem] font-bold">&gt; Write your review</h2>
-                              <textarea name="" id="textReview" className="bg-[#3f3f3f] border-none w-full rounded-[10px] p-4 text-white" placeholder="Write a review...">{props.description}</textarea>
+                              <textarea disabled name="" id="textReview" className="bg-[#3f3f3f] border-none w-full rounded-[10px] p-4 text-white" placeholder="Write a review...">{props.description}</textarea>
                           </div>
                       </div>
                   

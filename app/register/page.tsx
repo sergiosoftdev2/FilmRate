@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import HeaderComponent from "../components/ui/headerComponent/HeaderComponent";
-import "./login.css";
+import "./register.css";
 import { AuroraBackground } from "../components/ui/aurora-background";
 import Link from "next/link";
-import { getUserID, userLogInDB } from "../components/db/DB";
+import { getUserID, userRegister } from "../components/db/DB";
 import { useRouter } from "next/navigation";
 
-export default function Login({ children }: any) {
+export default function Register({ children }: any) {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
 
@@ -16,7 +16,7 @@ export default function Login({ children }: any) {
     const username = (document.getElementById("username") as HTMLInputElement).value;
     const password = (document.getElementById("password") as HTMLInputElement).value;
 
-    if (await userLogInDB(username, password)) {
+    if (await userRegister(username, password)) {
       localStorage.setItem("isLogged", "true");
       const userID = await getUserID(username);
       localStorage.setItem("user_id", userID);
@@ -55,11 +55,11 @@ export default function Login({ children }: any) {
               <h2 className="text-white text-left text-[1.2rem] mb-[10px]">Password</h2>
               <input type="password" id="password" className="w-full rounded-[5px] p-1"></input>
             </div>
-            <button onClick={handleClick} className="myLoginButton">Login</button>
+            <button onClick={handleClick} className="myLoginButton">Register</button>
           </article>
         </div>
-        <p className="text-white mt-[20px] z-30 text-[1rem] p-[20px]">You don&apos;t have an account yet?
-          <Link href="/register" className="underline ml-[5px] hover:text-gray-400 duration-200">Register Now!</Link>
+        <p className="text-white mt-[20px] z-30 text-[1rem] p-[20px]">You have an account?
+          <Link href="/login" className="underline ml-[5px] hover:text-gray-400 duration-200">Login Now!</Link>
         </p>
       </div>
     </AuroraBackground>

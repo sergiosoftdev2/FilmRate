@@ -83,6 +83,8 @@ export default function Profile() {
     const handleClickLogOut = () => {
         if (typeof window !== "undefined") {
             window.localStorage.setItem("isLogged", "false");
+            localStorage.removeItem("user_id");
+            localStorage.removeItem("username");
             router.push("/login");
         }
     };
@@ -120,7 +122,7 @@ export default function Profile() {
                 setOffset(0);
             }
         }
-    }, [fetchData, getMoviesLength, offset, router]);
+    }, [router]);
 
     useEffect(() => {
         UIFix();
@@ -132,13 +134,13 @@ export default function Profile() {
             <>
                 <title>My Profile</title>
                 <HeaderComponentBasic />
-                <div className="w-[1000px] overflow-hidden ml-[auto] mr-[auto] bordersProfile">
-                    <section className="w-full flex gap-[50px] items-center justify-left">
-                        <div className="w-[25%]">
+                <div className="bordersProfile">
+                    <section className="infoUser">
+                        <div className="imgWrapper">
                             <img
                                 src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
                                 alt="Profile Pic"
-                                className="w-[100%] rounded-[50px] p-5"
+                                className="w-[100%]"
                             />
                         </div>
                         <div>
