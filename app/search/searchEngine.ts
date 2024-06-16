@@ -145,8 +145,6 @@ export async function getMovie(movie_id:any){
     }
   };
 
-  console.log(movie_id)
-
   const url = `https://api.themoviedb.org/3/movie/${movie_id}?language=en-US`
 
   try {

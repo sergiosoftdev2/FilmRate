@@ -1,0 +1,390 @@
+@keyframes l2 {
+    0%{
+        opacity: 0.3;
+    }
+    50%{
+        opacity: 0.6;
+    }
+    100%{
+        opacity: 0.3;
+    }
+}
+
+.wrapperInfoMovie{
+    width: calc(80vw - 20px);
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    padding: 20px;
+    height: fit-content;
+    position: relative;
+}
+
+.infoContainerMovie{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    position: relative;
+}
+
+.infoBoxMovie{
+    width: 75%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.infoBoxMovie h1{
+    font-size: 3vw;
+    font-weight: bold;
+    color: white;
+}
+
+.infoBoxMovie p{
+    font-size: 1vw;
+    color: rgb(138, 138, 138);
+}
+
+.imgWrapperMovie{
+    width: 25%;
+    height: 100%;
+}
+
+.imgWrapperMovie img{
+    border-radius: 10px;
+    width: 100%;
+}
+
+.addToLibraryButton{
+    margin-top: 20px;
+    width: 100%;
+    background-image: linear-gradient(to right top, #2c00ff, #5200ff, #6b00ff, #7f00ff, #9100ff);
+    padding: 10px;
+    opacity: 0.8;
+    font-size: 1vw;
+    color: white;
+    border-radius: 10px;
+
+    margin-top: auto;
+
+    transition: 0.2s;
+
+}
+
+.addToLibraryButton:hover{
+    background-image: linear-gradient(to right top, #2c00ff, #5200ff, #6b00ff, #7f00ff, #9100ff);
+    opacity: 1;
+}
+
+.imageLoader{
+    width: 100%;
+    aspect-ratio: 1 / 1.5;
+    background-color: rgb(87, 87, 87);
+    border-radius: 10px;
+    animation: l2 1.5s infinite;
+}
+
+.titleLoader{
+    width: 100%;
+    height: 10%;
+    background-color: rgb(87, 87, 87);
+    border-radius: 10px;
+    animation: l2 1.5s infinite;
+}
+
+.descriptionLoader{
+    width: 100%;
+    margin-top: 10px;
+    height: 30%;
+    background-color: rgb(87, 87, 87);
+    border-radius: 10px;
+    animation: l2 1.5s infinite;
+}
+
+.buttonLoader{
+    width: 100%;
+    margin-top: auto;
+    height: 10%;
+    background-color: rgb(87, 87, 87);
+    border-radius: 10px;
+    animation: l2 1.5s infinite;
+}
+
+@media (min-width: 300px) { 
+
+    .wrapperInfoMovie{
+        width: 100%;
+        padding: 0;
+    }
+  
+    .infoContainerMovie{
+        flex-direction: column;
+    }
+
+    .imgWrapperMovie{
+        width: 100%;
+        position: relative;
+    }
+
+    .imgWrapperMovie::after{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, rgb(17, 17, 17), rgba(17, 17, 17, 0.726));
+        transition: all 0.2s;
+        z-index: 1;
+    }
+    
+    .imgWrapperMovie img{
+        border-radius: 0;
+    }
+
+    .infoBoxMovie{
+        width: 100%;
+        position: absolute;
+        z-index: 2;
+        padding: 20px;
+    }
+
+    .infoBoxMovie h1{
+        font-size: 4vh;
+    }
+
+    .infoBoxMovie p{
+        font-size: 2vh;
+        color: #cccccc;
+    }
+
+    .addToLibraryButton{
+        width: 100%;
+        margin-top: 30px;
+        font-size: 2vh;
+        height: 10%;
+        background-color: rgb(87, 87, 87);
+        border-radius: 10px;
+    }
+
+    textarea{
+        min-height: 200px;
+    }
+
+    .ratingWrapper{
+        padding: 20px;
+    }
+
+    .ratingWrapper h2{
+        font-size: 3vh;
+        color: white;
+        margin-top: 30px;
+        font-weight: bold;
+    }
+
+    .voteWrapper{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .voteWrapper h2{
+        font-size: 20vw;
+        color: white;
+        font-weight: bold;
+        position: relative;
+    }
+
+    .voteWrapper h2::after{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(130, 63, 255, 0.342);
+        filter: blur(100px);
+        z-index: -1;
+    }
+
+}
+  
+/* You might do landscape phones here if your content seems to need it */
+@media (min-width: 450px) {
+}
+
+/* Starting into tablets somewhere in here */
+@media (min-width: 600px) {
+}
+
+/* Perhaps bigger tablets */
+@media (min-width: 750px) {
+    
+
+}
+
+/* Desktop screen or landscape tablet */
+@media (min-width: 900px) {
+
+    .wrapperInfoMovie{
+        width: calc(80vw);
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 20px;
+        padding: 20px;
+        height: fit-content;
+        position: relative;
+    }
+    
+    .infoContainerMovie{
+        display: flex;
+        gap: 20px;
+        width: 100%;
+        position: relative;
+        flex-direction: row;
+    }
+    
+    .infoBoxMovie{
+        width: 75%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+    }
+
+    .informationWrapper{
+        background-color: rgba(58, 58, 58, 0.479);
+        padding: 20px;
+        border-radius: 10px;
+    }
+    
+    .infoBoxMovie h1{
+        font-size: 3vw;
+        font-weight: bold;
+        color: white;
+    }
+    
+    .infoBoxMovie p{
+        font-size: 1vw;
+        color: rgb(167, 167, 167);
+    }
+    
+    .imgWrapperMovie{
+        width: 25%;
+        height: 100%;
+    }
+    
+    .imgWrapperMovie::after{
+        content: "";
+        background: none;
+    }
+    
+    .imgWrapperMovie img{
+        border-radius: 10px;
+        width: 100%;
+    }
+    
+    .addToLibraryButton{
+        margin-top: 20px;
+        width: 100%;
+        background-image: linear-gradient(to right top, #2c00ff, #5200ff, #6b00ff, #7f00ff, #9100ff);
+        padding: 10px;
+        opacity: 0.8;
+        font-size: 1vw;
+        color: white;
+        border-radius: 10px;
+    
+        transition: 0.2s;
+    
+    }
+    
+    .addToLibraryButton:hover{
+        background-image: linear-gradient(to right top, #2c00ff, #5200ff, #6b00ff, #7f00ff, #9100ff);
+        opacity: 1;
+    }
+    
+    .imageLoader{
+        width: 100%;
+        aspect-ratio: 1 / 1.5;
+        background-color: rgb(87, 87, 87);
+        border-radius: 10px;
+        animation: l2 1.5s infinite;
+    }
+    
+    .titleLoader{
+        width: 100%;
+        height: 10%;
+        background-color: rgb(87, 87, 87);
+        border-radius: 10px;
+        animation: l2 1.5s infinite;
+    }
+    
+    .descriptionLoader{
+        width: 100%;
+        margin-top: 10px;
+        height: 30%;
+        background-color: rgb(87, 87, 87);
+        border-radius: 10px;
+        animation: l2 1.5s infinite;
+    }
+    
+    .buttonLoader{
+        width: 100%;
+        margin-top: auto;
+        height: 10%;
+        background-color: rgb(87, 87, 87);
+        border-radius: 10px;
+        animation: l2 1.5s infinite;
+    }
+
+    .ratingWrapper{
+        padding: 20px;
+    }
+
+    .voteWrapper{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        margin-top: auto;
+        height: auto;
+        z-index: -2;
+    }
+
+    .voteWrapper h2{
+        font-size: 8vw;
+        color: white;
+        font-weight: bold;
+        position: relative;
+        padding: 20px;
+        border-radius: 10px;
+        z-index: -5;
+    }
+
+    .voteWrapper h2::after{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(172, 29, 255, 0.185);
+        filter: blur(100px);
+        z-index: -5;
+    }
+
+}
+
+/* A bit bigger if you need some adjustments around here */
+@media (min-width: 1100px) {
+}
+
+/* Widescreens */
+@media (min-width: 1500px) {
+
+}

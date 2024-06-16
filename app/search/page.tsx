@@ -7,6 +7,7 @@ import "./page.css"
 import { Playfair_Display } from "next/font/google";
 import { SearchCards } from "../components/ui/searchCards/SearchCards";
 import { InfoComponent } from "../components/ui/infoComponent/InfoComponent";
+import Link from "next/link";
 
 const playfairDisplay = Playfair_Display({
   weight: ["800", "500"], // Puedes especificar el peso si hay varias opciones
@@ -30,7 +31,6 @@ export default function Search() {
   });
 
   const [cards, setCards] = useState<Card[]>([]);
-  const [showInfo, setShowInfo] = useState(false);
   const isFirstRender = useRef(true);
   const addCard = (id: number, name: string, image: string, description: string) => {
     const newCard = {
@@ -58,43 +58,32 @@ export default function Search() {
         })
         console.log(data)
       })
-      element.addEventListener("click", () => {
-        setShowInfo(true);
-      })
     })
-
-    if(showInfo){
-      document.body.style.overflow = "hidden";
-    }else{
-      document.body.style.overflow = "auto";
-    }
   })
-
-  const handleShowInfo = (value:any) => {
-    setShowInfo(value);
-  };
-
   return (
     <>
 
       <title>Search | FilmRate</title>
 
       <HeaderComponent/> 
-      {showInfo && <InfoComponent idnumber={data.idnumber} title={data.title} image={data.image} description={data.description} setShowInfo={handleShowInfo} showInfo={showInfo} />}
       <div className="w-[100%] relative">
         <div className="w-[100%] h-[200px] flex flex-col justify-center items-center " id="SearchWrapper">
             <input autoComplete="off" type="text" name="" className="p-2 pl-4 rounded-[20px] searchInput myText" placeholder="Type the movie name..." id="search"/>
         </div>
         <div className="flex flex-wrap gap-[30px] justify-center top-[60%]" id="searchEngine">
             {cards.map((card, index) => (
-              <SearchCards 
-                key={index} 
-                id={card.id} 
-                name={card.name} 
-                image={card.image} 
-                description={card.description}
-                className="myCardTransition"
-              />
+              <Link href="/search/[filmId]" as={`/search/${card.id}`}>
+              
+                <SearchCards 
+                  key={index} 
+                  id={card.id} 
+                  name={card.name} 
+                  image={card.image} 
+                  description={card.description}
+                  className="myCardTransition"
+                />
+              
+              </Link>
             ))}
         </div>
       </div>
