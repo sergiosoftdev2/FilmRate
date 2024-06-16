@@ -72,10 +72,10 @@ export default function Search() {
         </div>
         <div className="flex flex-wrap gap-[30px] justify-center top-[60%]" id="searchEngine">
             {cards.map((card, index) => (
-              <Link href="/search/[filmId]" as={`/search/${card.id}`}>
+              <Link href="/search/[filmId]" as={`/search/${card.id}`} key={index} >
               
                 <SearchCards 
-                  key={index} 
+                  
                   id={card.id} 
                   name={card.name} 
                   image={card.image} 
