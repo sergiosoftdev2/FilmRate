@@ -10,6 +10,24 @@
     }
 }
 
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    pointer-events: auto; /* Asegura que los eventos del puntero funcionen */
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4c00ff;
+    cursor: pointer;
+}
+
 .wrapperInfoMovie{
     width: calc(80vw - 20px);
     margin-left: auto;
@@ -211,6 +229,63 @@
         z-index: -1;
     }
 
+    .ratingWrapper h2{
+        font-size: 5vw;
+        margin-top: 0;
+    }
+
+    .ratingNumberWrapper{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        margin-top: 20px;
+        gap: 20px;
+    }
+
+    .ratingNumberWrapper h2{
+        font-size: 8vw;
+    }
+
+    .ratingTextWrapper{
+        margin-left: auto;
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+
+        transition: 0.2s;
+
+    }
+
+    .ratingTextWrapper:hover{
+        box-shadow: 0 4px 30px #6a00ff36;
+    }
+
+    .ratingNumber{
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .ratingNumber h3{
+        font-size: 5vw;
+        color: white;
+        font-weight: bold;
+    }
+
+    .ratingSlider{
+        width: 100%;
+    }
+
 }
   
 /* You might do landscape phones here if your content seems to need it */
@@ -343,7 +418,7 @@
     }
 
     .ratingWrapper{
-        padding: 20px;
+        padding: 0;
     }
 
     .voteWrapper{
@@ -376,6 +451,59 @@
         background-color: rgba(172, 29, 255, 0.185);
         filter: blur(100px);
         z-index: -5;
+    }
+
+    .ratingWrapper h2{
+        font-size: 5vw;
+        margin-top: 0;
+    }
+
+    .ratingNumberWrapper{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+        margin-top: 20px;
+        gap: 20px;
+    }
+
+    .ratingNumberWrapper h2{
+        font-size: 8vw;
+    }
+
+    .ratingTextWrapper{
+        margin-left: auto;
+        padding: 20px;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+
+        transition: 0.2s;
+
+    }
+
+    .ratingTextWrapper:hover{
+        box-shadow: 0 4px 30px #6a00ff36;
+    }
+
+    .ratingNumber{
+        width: 50%;
+    }
+
+    .ratingNumber h3{
+        font-size: 5vw;
+        color: white;
+        font-weight: bold;
+    }
+
+    .ratingSlider{
+        width: 100%;
     }
 
 }

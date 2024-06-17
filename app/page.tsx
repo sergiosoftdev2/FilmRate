@@ -16,6 +16,7 @@ export default function Home() {
 
   return (
    <>
+   <title>FilmRate | Explore Movies</title>
     <HeaderComponent />
       <AuroraBackground className="w-[100dvw] h-[100dvh]">
         <h1 className=" text-white textTitle">FilmRate</h1>

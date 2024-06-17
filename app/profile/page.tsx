@@ -132,7 +132,7 @@ export default function Profile() {
     if (isLoading) {
         return (
             <>
-                <title>My Profile</title>
+                <title>My Profile | FilmRate</title>
                 <HeaderComponentBasic />
                 <div className="bordersProfile">
                     <section className="infoUser">

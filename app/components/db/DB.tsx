@@ -9,19 +9,16 @@ const client = createClient({
 
 export async function selectUsers(){
     const res = await client.execute("SELECT * FROM users");
-    console.log(res.rows[0].user_id);
 }
 
-export async function insertFilm(user:number, id:number, review:string){
+export async function insertFilm(user:number, id:number, review:string, rate:number){
 
-    console.log(id, user, review);
     
 
     try{
-        const res = await client.execute(`INSERT INTO favorites (user, movie, critic) VALUES (${user}, ${id}, '${review}')`);
+        const res = await client.execute(`INSERT INTO favorites (user, movie, rate, critic) VALUES (${user}, ${id}, ${rate}, '${review}')`);
         return true;
     }catch(err){
-        console.log(err)
         return false
     }
 }
@@ -66,7 +63,6 @@ export async function userFilms(user:number, offset:number){
             }
             moviesData.push(movieData)
         } catch (err) {
-            console.error('error:' + err);
             return null; // Retorna null en caso de error
         }
     }
@@ -84,14 +80,10 @@ export async function userLogInDB(user:string, pass:string){
             args: [user]
         });
 
-        console.log(res.rows[0].psswd)
-        console.log(encrypt(pass))
-
         if(res.rows[0].username == user && res.rows[0].psswd == encrypt(pass)){
             return true
         }
     }catch(err){
-        console.log(err)
         return false   // Handle errors gracefully (e.g., display an error message to the user)
     }
 }
@@ -113,7 +105,6 @@ export async function userRegister(user:string, pass:string){
         return true
 
     }catch(err){
-        console.log(err)
         return false   // Handle errors gracefully (e.g., display an error message to the user)
     }
 
@@ -123,7 +114,6 @@ export async function userRegister(user:string, pass:string){
 
 export async function countUsers(){
     const res = await client.execute("SELECT COUNT(username) as countmovies FROM users")
-    console.log(res.rows[0])
     return res.rows[0]
 }
 

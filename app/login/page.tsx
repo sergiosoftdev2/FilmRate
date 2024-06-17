@@ -40,6 +40,7 @@ export default function Login({ children }: any) {
 
   return (
     <AuroraBackground className="w-[100dvw] h-[100dvh]">
+      <title>Login | FilmRate</title>
       <HeaderComponent />
       <div className="w-full h-screen flex items-center justify-center flex-col">
         <div className="bg-[#3f3f3f] recuadro rounded-[20px] flex p-[30px] box-border gap-[20px]">
